@@ -1,0 +1,47 @@
+name: Deploy via FTP
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to FTP server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Options: 'ftps' (recommended) or 'ftp'
+          protocol: ${{ secrets.FTP_PROTOCOL || 'ftps' }}
+          # Astro build output
+          local-dir: dist/
+          # e.g. public_html/ or public_html/subcarpeta/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # WARNING: borra archivos remotos que no estén en dist
+          dangerous-clean-slate: true
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+            **/src/**
+            **/README.*
+            **/*.zip
+            .well-known/**
