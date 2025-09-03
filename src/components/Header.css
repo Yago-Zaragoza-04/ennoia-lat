@@ -1,0 +1,161 @@
+/* Header component specific styles */
+
+/* Site logo styling */
+.site-logo {
+  display: block;
+  height: 1.8em; /* fits within the 3em header line-height */
+  width: auto;
+  margin-top: 0.6em; /* centers vertically within header */
+}
+
+@media screen and (max-width: 736px) {
+  .site-logo {
+    height: 1.4em;
+    margin-top: 0.8em;
+  }
+}
+
+/* New nav styles */
+#header {
+  color: #000;
+}
+#header.alt {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+
+#nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+#nav .menu-toggle {
+  display: none;
+  background: transparent;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  border: 2px solid;
+}
+#nav .menu-toggle .bars {
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  position: relative;
+  transition: background-color 250ms ease;
+}
+#nav .menu-toggle .bars::before,
+#nav .menu-toggle .bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: currentColor;
+  transition: transform 300ms ease, top 300ms ease, background-color 250ms ease;
+}
+#nav .menu-toggle .bars::before {
+  top: -6px;
+}
+#nav .menu-toggle .bars::after {
+  top: 6px;
+}
+
+/* Morph hamburger to X when open */
+#nav .menu-toggle[aria-expanded="true"] .bars {
+  background: transparent;
+}
+#nav .menu-toggle[aria-expanded="true"] .bars::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+#nav .menu-toggle[aria-expanded="true"] .bars::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* Theme-aware colors (default header is light; alt over banner is dark) */
+#header:not(.alt) #nav .menu-toggle {
+  border-color: rgba(0, 0, 0, 0.85);
+  color: #000;
+}
+#header.alt #nav .menu-toggle {
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+}
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.25rem 0.4rem;
+  border-radius: 4px;
+}
+#header.alt .nav-links a {
+  color: #fff;
+}
+.nav-links a:hover {
+  color: var(--section1-accent, #3f9e6a);
+  background: rgba(63, 158, 106, 0.12);
+}
+
+/* Override theme defaults from main.css for header links */
+#header:not(.alt) nav > ul > li > a { color: #000 !important; }
+#header.alt nav > ul > li > a { color: #ffffff !important; }
+
+@media (max-width: 980px) {
+  #nav .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+  /* Overlay */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms ease;
+    z-index: 9000;
+  }
+  .nav-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* Side drawer */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(86vw, 340px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    transform: translateX(100%);
+    transition: transform 300ms ease;
+    z-index: 10000;
+  }
+  #header:not(.alt) .nav-links {
+    background: #ffffff;
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  #header.alt .nav-links {
+    background: rgba(13, 27, 18, 0.98);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .nav-links.open {
+    transform: translateX(0);
+  }
+  .nav-links li a {
+    display: block;
+    padding: 0.85rem 0.75rem;
+    border-radius: 6px;
+  }
+}

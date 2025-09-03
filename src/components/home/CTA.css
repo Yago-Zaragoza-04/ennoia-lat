@@ -1,0 +1,196 @@
+/* CTA component: "Sé parte de la comunidad" */
+
+#cta.community {
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  /* Base color matches overlay tones for any letterboxing */
+  background-color: rgb(13, 27, 18);
+}
+
+/* Responsive background video layer */
+#cta.community .bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* place behind overlay and content */
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Dark vignette to ensure readability over the photo */
+#cta.community::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      1200px 600px at 30% -100px,
+      rgba(0, 0, 0, 0.25),
+      transparent 60%
+    ),
+    linear-gradient(180deg, rgba(13, 27, 18, 0.85), rgba(13, 27, 18, 0.75));
+  pointer-events: none;
+  /* above video, below content */
+  z-index: 1;
+}
+
+#cta.community > .inner {
+  position: relative;
+  display: block;
+  /* Desktop: más espacio para el contenido central, CTA más angosto */
+  grid-template-columns: 0.8fr 2.2fr minmax(240px, 0.5fr); /* intro | content | ctas */
+  gap: 2rem;
+  align-items: start;
+  /* above overlay/video */
+  z-index: 2;
+}
+
+/* Widen the container specifically for the CTA, overriding the theme's 60em */
+#cta.community.wrapper > .inner {
+  /* Break the 60em cap from the base theme */
+  width: min(96vw, 110em) !important;
+}
+
+#cta.community header.major h2 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+#cta.community .content p {
+  max-width: 62ch;
+}
+#cta.community .lead {
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 45em;
+}
+#cta.community .subtitle {
+  margin: 1rem 0 0.5rem;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+}
+
+#cta.community .paths {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 0 0 1.75rem;
+  list-style: none;
+}
+
+#cta.community .paths li {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+}
+
+/* Ghost buttons */
+#cta.community .cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+#cta.community .actions {
+  display: grid;
+  gap: 1rem;
+}
+#cta.community .cta-buttons .actions {
+  /* uniform width stack container */
+  width: 100%;
+  max-width: 28rem;
+}
+#cta.community .cta-buttons .actions > li { width: 100%; }
+#cta.community .button.ghost {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  color: #fff !important;
+  /* make all buttons same width */
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.9rem 1.25rem;
+  min-height: 3.25rem; /* consistent height */
+}
+/* Hover like the third (accent) for all ghost buttons */
+#cta.community .button.ghost:hover {
+  border-color: var(--section1-accent, #3f9e6a);
+  color: var(--section1-accent, #3f9e6a) !important;
+  background: rgba(63, 158, 106, 0.15);
+}
+#cta.community .button.ghost.alt {
+  border-color: var(--section1-accent, #3f9e6a);
+  color: var(--section1-accent, #3f9e6a) !important;
+}
+#cta.community .button.ghost.alt:hover {
+  background: rgba(63, 158, 106, 0.15);
+}
+
+@media (max-width: 1280px) {
+  /* En pantallas medianas, que las tarjetas no queden tan apretadas */
+  #cta.community .paths {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  /* Garantiza altura de sección para que el video la ocupe */
+  #cta.community {
+    min-height: 70vh;
+  }
+  #cta.community.wrapper > .inner {
+    width: 100%;
+  }
+  #cta.community > .inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  #cta.community .intro,
+  #cta.community .content {
+    text-align: center;
+  }
+  #cta.community .paths {
+    grid-template-columns: 1fr;
+  }
+  #cta.community .lead {
+    max-width: 36ch;
+  }
+  #cta.community .cta-buttons {
+    justify-content: center;
+  }
+  #cta.community .cta-buttons .actions {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  /* Volver a full-bleed: el video ocupa todo el fondo en móvil */
+  #cta.community .bg-video {
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+@media (min-width: 1600px) {
+  /* En monitores grandes, aún más aire para el contenido */
+  #cta.community > .inner {
+    grid-template-columns: 0.75fr 2.35fr minmax(280px, 0.45fr);
+  }
+}
+
+/* Accesibilidad / ahorro de datos: respetar reduced motion con imagen de respaldo */
+@media (prefers-reduced-motion: reduce) {
+  #cta.community .bg-video {
+    display: none;
+  }
+  #cta.community {
+    background: url("/images/ennoia_lat_fondo.png") center / cover no-repeat;
+  }
+}

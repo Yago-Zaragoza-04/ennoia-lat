@@ -1,0 +1,123 @@
+/* Alliances section styles - aligned with SectionOne/Three theme */
+
+#alliances.wrapper.style3.special {
+  background: radial-gradient(1200px 600px at 50% -200px, var(--section1-bg-glow), transparent 60%),
+              linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0) 30%),
+              var(--section1-bg);
+  color: var(--section1-text);
+}
+
+#alliances .major:after { background-color: var(--section1-accent); }
+
+.alliances-list, #alliances .major p, #alliances .major h2,
+.alliance h3, .alliance p { letter-spacing: 0.02em; }
+
+#alliances .major h2 { font-size: 1.1em; }
+#alliances .major p { font-size: 0.95em; }
+
+.alliances-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding: 0;
+}
+
+/* If there's a single item in the last row (odd count), center it */
+@media (min-width: 981px) {
+  .alliances-list > .alliance:last-child:nth-child(odd) {
+    grid-column: 1 / -1;            /* span both columns */
+    justify-self: center;           /* center the card */
+    width: calc((100% - 1.25rem) / 2); /* keep same width as one column */
+  }
+}
+
+@media (max-width: 980px) {
+  .alliances-list { grid-template-columns: 1fr; }
+}
+
+.alliance {
+  background: #102a1c;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  /* Smooth interactions */
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  /* Subtle enter animation */
+  opacity: 0;
+  animation: allianceIn 520ms ease both;
+}
+.alliance:nth-child(2n) { background: #173a27; }
+
+.alliance h3 { margin: 0 0 0.4rem; font-size: 1em; }
+.alliance p { margin: 0.25rem 0; color: rgba(255,255,255,0.88); font-size: 0.95em; line-height: 1.6; }
+.alliance p.receive { color: rgba(255,255,255,0.9); font-size: 0.95em; }
+
+/* Sectioning between descripción y "Reciben" */
+.alliance p.receive {
+  margin-top: 0.95rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+.alliance p.receive strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Decorative accent: soft glow and top bar */
+.alliance::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(480px 220px at 50% -90px, var(--section1-bg-glow, rgba(63,158,106,0.18)), transparent 60%);
+  opacity: 0;
+  transition: opacity 260ms ease;
+  pointer-events: none;
+}
+.alliance::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--section1-accent, #3f9e6a), transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 300ms ease;
+}
+
+/* Hover / Focus interactions */
+.alliance:hover,
+.alliance:focus-within {
+  transform: translateY(-4px);
+  border-color: rgba(63,158,106,0.35);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.28), 0 0 0 1px rgba(63,158,106,0.18) inset;
+}
+.alliance:hover::before,
+.alliance:focus-within::before { opacity: 1; }
+.alliance:hover::after,
+.alliance:focus-within::after { transform: scaleX(1); }
+
+/* Staggered entrance for the five items */
+.alliances-list .alliance:nth-child(1) { animation-delay: 60ms; }
+.alliances-list .alliance:nth-child(2) { animation-delay: 120ms; }
+.alliances-list .alliance:nth-child(3) { animation-delay: 180ms; }
+.alliances-list .alliance:nth-child(4) { animation-delay: 240ms; }
+.alliances-list .alliance:nth-child(5) { animation-delay: 300ms; }
+
+@keyframes allianceIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .alliance { animation: none; opacity: 1; transition: none; }
+  .alliance:hover, .alliance:focus-within { transform: none; }
+  .alliance::before, .alliance::after { transition: none; }
+}

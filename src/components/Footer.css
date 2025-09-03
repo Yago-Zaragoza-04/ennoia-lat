@@ -1,0 +1,59 @@
+/* Footer styled similar to Header but in light theme: white background, centered content */
+
+#footer {
+	background: #ffffff !important; /* override template */
+	color: #0d1b12 !important;
+	border-top: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+/* Also override template's landing variant */
+body.landing #footer { background: #ffffff !important; }
+
+#footer .inner {
+	width: min(96vw, 1200px);
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
+
+#footer .brand-and-social {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+#footer .brand {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+#footer .brand img { height: 36px; width: auto; }
+
+#footer .icons { margin: 0; }
+#footer .icons a { color: rgba(0,0,0,0.6) !important; }
+#footer .icons a:hover { color: var(--section1-accent, #3f9e6a) !important; }
+#footer .icons li { display: inline-block; margin: 0 0 0 0.5rem; }
+
+#footer .nav-links { list-style: none; display: flex; gap: 1rem; margin: 0; }
+#footer .nav-links a { color: inherit; text-decoration: none; padding: 0.25rem 0.4rem; border-radius: 4px; }
+#footer .nav-links a:hover { color: var(--section1-accent, #3f9e6a); background: rgba(63,158,106,0.12); }
+
+#footer .legal {
+	margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	font-size: 0.95rem;
+	color: rgba(0,0,0,0.65);
+}
+
+#footer a { color: inherit; text-decoration: none; }
+#footer a:hover { color: var(--section1-accent, #3f9e6a); }
+
+@media (max-width: 736px) {
+	#footer .brand-and-social { flex-direction: column; align-items: center; gap: 0.75rem; }
+	#footer .nav-links { flex-wrap: wrap; justify-content: center; }
+	#footer .brand img { height: 42px; }
+}

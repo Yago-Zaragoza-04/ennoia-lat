@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#6bd49b" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0d1b12" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="320" fill="#0d1b12"/>
+  <circle cx="160" cy="120" r="76" fill="url(#g)" stroke="rgba(255,255,255,0.18)" stroke-width="4"/>
+  <g fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="4">
+    <path d="M80 256c16-36 48-60 80-60s64 24 80 60"/>
+  </g>
+  <text x="160" y="128" text-anchor="middle" dominant-baseline="middle" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial" font-size="36" font-weight="800" fill="#ffffff" opacity="0.9">FOTO</text>
+</svg>

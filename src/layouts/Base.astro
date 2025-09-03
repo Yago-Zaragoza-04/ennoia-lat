@@ -1,0 +1,45 @@
+---
+interface Props {
+  title?: string;
+  bodyClass?: string;
+  headerAlt?: boolean;
+}
+const { title = 'Ennoia Latam', bodyClass = '', headerAlt = false } = Astro.props as Props;
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
+import "../styles/global.css";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>{title}</title>
+  <!-- Favicon: Ennoia "e" logo -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ennoia_lat_logo.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ennoia_lat_logo.png" />
+  <link rel="apple-touch-icon" href="/images/ennoia_lat_logo.png" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+  </head>
+  <body class={bodyClass}>
+    <div id="page-wrapper">
+  <Header alt={headerAlt} client:load />
+
+      <slot />
+
+  <Footer client:load />
+    </div>
+
+    <!-- Scripts (keep original order) -->
+  <script src="/assets/js/jquery.min.js" is:inline></script>
+  <script src="/assets/js/jquery.scrollex.min.js" is:inline></script>
+  <script src="/assets/js/jquery.scrolly.min.js" is:inline></script>
+  <script src="/assets/js/browser.min.js" is:inline></script>
+  <script src="/assets/js/breakpoints.min.js" is:inline></script>
+  <script src="/assets/js/util.js" is:inline></script>
+  <script src="/assets/js/main.js" is:inline></script>
+  </body>
+  
+</html>

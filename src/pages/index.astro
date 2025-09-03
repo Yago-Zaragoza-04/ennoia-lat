@@ -1,0 +1,34 @@
+---
+import Base from "../layouts/Base.astro";
+import Banner from "../components/home/Banner.jsx";
+import SectionOne from "../components/home/SectionOne.jsx";
+import SectionTwoSpotlights from "../components/home/SectionTwoSpotlights.jsx";
+import SectionThreeFeatures from "../components/home/SectionThreeFeatures.jsx";
+import Alliances from "../components/home/Alliances.jsx";
+import CTA from "../components/home/CTA.jsx";
+import Programs from "../components/home/Programs.jsx";
+import Contact from "../components/home/Contact.jsx";
+import Members from "../components/home/Members.jsx";
+// import Partners from "../components/home/Partners.jsx"; // ocultado temporalmente
+---
+
+<Base title="Ennoia Latam" bodyClass="landing is-preload" headerAlt>
+  <Banner client:load />
+
+  <SectionOne client:load />
+
+  <SectionTwoSpotlights client:load />
+
+  <!-- Mantengo el código original sin mostrarlo -->
+  <!-- <SectionThreeFeatures client:load /> -->
+
+  <Programs client:load />
+
+  <Members client:load />
+  <Alliances client:load />
+  <!-- <Partners client:load /> -->
+
+  <CTA client:load />
+
+  <Contact client:load />
+</Base>

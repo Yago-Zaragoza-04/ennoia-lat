@@ -1,0 +1,141 @@
+/* Programs section: grid of program cards with hover overlay */
+
+#programs {
+  position: relative;
+  background: radial-gradient(1200px 600px at 50% -200px, var(--section1-bg-glow, rgba(63, 158, 106, 0.18)), transparent 60%),
+              linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0) 30%),
+              var(--section1-bg, #0d1b12);
+  color: var(--section1-text, #ffffff);
+  overflow-x: hidden; /* prevent tiny horizontal scroll due to full-bleed grid */
+  padding-bottom: 0; /* connect last row with next section */
+}
+
+#programs .major:after { background-color: var(--section1-accent, #3f9e6a); }
+
+#programs .inner {
+  position: relative;
+}
+
+/* Cap width after a large breakpoint to keep readability */
+@media (min-width: 1280px) {
+  #programs .inner { width: 100%; }
+}
+
+/* Grid */
+#programs .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two columns, each half viewport */
+  gap: 0; /* no separation between cards */
+  position: relative;
+  width: 100vw; /* fallback */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Use dynamic viewport units when supported to avoid scrollbar width issues */
+@supports (width: 100dvw) {
+  #programs .grid {
+    width: 100dvw;
+    margin-left: calc(50% - 50dvw);
+    margin-right: calc(50% - 50dvw);
+  }
+}
+
+#programs .card {
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  cursor: pointer;
+  isolation: isolate; /* ensure overlays stack correctly */
+  border: 2px solid transparent;
+  box-shadow: none;
+  transition: border-color 250ms ease;
+}
+
+#programs .card .media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* square */
+  background: #0d1b12;
+}
+
+#programs .card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+#programs .card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.55) 65%);
+  z-index: 1;
+  transition: opacity 300ms ease;
+}
+
+#programs .card .title {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 0.85rem;
+  z-index: 2;
+  color: var(--section1-text, #ffffff);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+}
+
+#programs .card .credit {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.85rem;
+  z-index: 2;
+  color: var(--section1-text, #ffffff);
+  opacity: 0.9;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+#programs .card .overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+  background: rgba(13,27,18,0.6);
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+#programs .card:hover img { transform: scale(1.04); }
+#programs .card:hover::after { opacity: 0.9; }
+#programs .card:hover { border-color: var(--section1-accent, #3f9e6a); }
+#programs .card:hover .overlay { opacity: 1; }
+
+
+@media (max-width: 980px) {
+  #programs .grid { grid-template-columns: 1fr; }
+  #programs .card .title { font-size: 1.25rem; }
+}
+
+/* Center the last card if the total count is odd (single item in last row) */
+#programs .grid > .card:last-child:nth-child(odd) {
+  grid-column: 1 / -1; /* span both columns */
+  justify-self: center; /* center within full grid width */
+  width: 50vw; /* keep it one-column sized but centered */
+}
+
+@media (max-width: 980px) {
+  #programs .grid > .card:last-child:nth-child(odd) {
+    width: 100%; /* full width on mobile */
+  }
+}

@@ -1,0 +1,15 @@
+/* BannerContent component specific styles */
+
+/* Banner logo styling */
+.banner-logo {
+  display: inline-block;
+  height: 2.2em;
+  width: auto;
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 736px) {
+  .banner-logo { 
+  height: 2.8em; 
+  }
+}

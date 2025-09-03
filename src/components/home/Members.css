@@ -1,0 +1,86 @@
+/* Members section - innovative, brand-aligned */
+
+#members {
+  position: relative;
+  background-image: url('/images/ennoia_lat_fondo.png');
+  background-color: var(--section1-bg, #0d1b12);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--section1-text, #ffffff);
+}
+
+/* Mobile/touch fallback: smoother scroll without fixed backgrounds */
+@media (max-width: 980px) {
+  #members { background-attachment: scroll; }
+}
+
+#members .major:after { background-color: var(--section1-accent, #3f9e6a); }
+
+#members .members-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 por fila en desktop */
+  gap: 1.25rem;
+}
+
+@media (max-width: 1280px) { #members .members-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 980px)  { #members .members-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { #members .members-grid { grid-template-columns: 1fr; } }
+
+.member-card {
+  /* Mismo fondo que SectionOne (gradiente y base oscura) */
+  background: radial-gradient(1200px 600px at 50% -200px, var(--section1-bg-glow, rgba(63, 158, 106, 0.18)), transparent 60%),
+              linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0) 30%),
+              var(--section1-bg, #0d1b12);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 220ms ease, background 220ms ease, border-color 220ms ease;
+  /* Todas las cajas mismo tamaño: forzamos razón de aspecto fija */
+  aspect-ratio: 4 / 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+.member-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(63,158,106,0.35);
+}
+
+.member-card .avatar {
+  width: 132px; height: 132px; border-radius: 50%; margin: 0 auto 0.9rem; overflow: hidden;
+  background: rgba(255,255,255,0.06);
+  border: 2px solid rgba(255,255,255,0.12);
+  display: grid; place-items: center;
+}
+.member-card .avatar img { width: 100%; height: 100%; object-fit: cover; }
+.member-card .initials { font-weight: 800; font-size: 1.5rem; opacity: 0.9; }
+
+.member-card .name { margin: 0.35rem 0 0.1rem; font-size: 15px; line-height: 1.25; }
+.member-card .role {
+  opacity: 0.9; font-weight: 800; letter-spacing: 0.06em; text-transform: none; font-size: 15px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* Hover modal */
+.member-modal {
+  position: absolute;
+  inset: 0.75rem; /* small inset inside the rounded card */
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.82);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 1rem;
+}
+.member-modal__content {
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  text-align: left;
+  max-height: 100%;
+  overflow: auto;
+}

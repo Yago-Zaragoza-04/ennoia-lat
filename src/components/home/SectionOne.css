@@ -1,0 +1,46 @@
+/* SectionOne component specific styles */
+
+/* Palette derived from hero video green and white header */
+:root {
+	--section1-bg: #0d1b12;            /* very dark greenish background */
+	--section1-bg-glow: rgba(63, 158, 106, 0.18); /* soft green glow */
+	--section1-accent: #3f9e6a;        /* accent green close to video tint */
+	--section1-text: #ffffff;          /* text to match white header */
+}
+
+/* Dark background with subtle inner glow to keep it "illuminated" */
+#one.wrapper.style1.special {
+	background: radial-gradient(1200px 600px at 50% -200px, var(--section1-bg-glow), transparent 60%),
+							linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0) 30%),
+							var(--section1-bg);
+	color: var(--section1-text);
+}
+
+/* Heading underline and icon accent in green */
+#one .major:after {
+	background-color: var(--section1-accent);
+}
+
+#one .icons.major .icon {
+	box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15);
+}
+
+#one .icons.major .style1,
+#one .icons.major .style2,
+#one .icons.major .style3 {
+	color: var(--section1-accent);
+}
+
+/* Paragraph readability */
+#one .inner p {
+	color: rgba(255,255,255,0.85);
+}
+
+/* Keep spacing consistent */
+@media (max-width: 980px) {
+	#one.wrapper.style1.special {
+		background: radial-gradient(900px 420px at 50% -140px, var(--section1-bg-glow), transparent 60%),
+								linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0) 30%),
+								var(--section1-bg);
+	}
+}

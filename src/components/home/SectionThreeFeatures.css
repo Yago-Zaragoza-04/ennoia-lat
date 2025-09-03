@@ -1,0 +1,46 @@
+/* SectionThreeFeatures themed to match SectionOne palette */
+
+/* Uses global CSS vars declared in SectionOne.css :root */
+/* --section1-bg, --section1-bg-glow, --section1-accent, --section1-text */
+
+/* Dark background with subtle glow, same as SectionOne */
+#three.wrapper.style3.special {
+	background: radial-gradient(1200px 600px at 50% -200px, var(--section1-bg-glow), transparent 60%),
+							linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0) 30%),
+							var(--section1-bg);
+	color: var(--section1-text);
+	/* two solid greens for alternating feature cards */
+	--feature-green-1: #102a1c; /* darker evergreen, distinct from bg */
+	--feature-green-2: #173a27; /* lighter evergreen */
+	--feature-border: rgba(255,255,255,0.06);
+}
+
+/* Header underline in accent green */
+#three .major:after { background-color: var(--section1-accent); }
+
+/* Body copy readability */
+#three .inner p { color: rgba(255,255,255,0.85); }
+
+/* Feature cards: remove purple steps, use subtle light-on-dark panel */
+#three .features li {
+	background: var(--feature-green-1) !important; /* solid green */
+	border-radius: 8px;
+	border: 1px solid var(--feature-border);
+}
+
+/* Even items use the lighter green */
+#three .features li:nth-child(2n) {
+	background: var(--feature-green-2) !important;
+}
+
+/* Icon accent color */
+#three .features li:before { color: var(--section1-accent) !important; }
+
+/* Mobile spacing keeps the same look */
+@media (max-width: 980px) {
+	#three.wrapper.style3.special {
+		background: radial-gradient(900px 420px at 50% -140px, var(--section1-bg-glow), transparent 60%),
+								linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0) 30%),
+								var(--section1-bg);
+	}
+}

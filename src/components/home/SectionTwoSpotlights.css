@@ -1,0 +1,151 @@
+/* SectionTwoSpotlights component specific styles */
+
+/* Section background (image visible through the left windows) */
+#two {
+	background-image: url('/images/ennoia_lat_fondo.png');
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+
+	/* column split (image/content) for desktop & tablet */
+	--split-image: 40%; /* image column width */
+}
+
+/* Make the image panels show a shared fixed background image while content blocks stay above */
+.spotlight {
+	position: relative;
+}
+
+.spotlight .content {
+	position: relative;
+	z-index: 2; /* ensure text boxes sit above the background image */
+}
+
+
+.spotlight .image {
+	/* Transparent so the section background is visible as a window */
+	background: transparent;
+	position: relative; /* for overlay positioning */
+	min-height: clamp(220px, 30vw, 380px); /* keep visible area when <img> is hidden */
+}
+
+/* Hide the inline <img> so only the background is visible */
+.spotlight .image img {
+	display: none !important;
+}
+
+/* Remove any overlay so the background is clean */
+.spotlight .image::after { display: none; }
+
+	/* Mobile/touch fallback: disable fixed attachment for smoother scrolling */
+	@media (max-width: 980px) {
+		#two { background-attachment: scroll; }
+	}
+
+/* Make both columns the same height so rectangles fill the row */
+#two .spotlight { align-items: stretch; }
+#two .spotlight .content,
+#two .spotlight .image { height: 100%; }
+
+/* --- Custom backgrounds for content rectangles --- */
+/* Color tokens */
+#two {
+	--spotlight-light-bg: #ffffff;  /* pure white for rows 1 and 3 */
+	--spotlight-dark-bg:  #0d1b12;  /* SectionOne dark */
+}
+
+/* Remove default gray tint; we'll color the whole row explicitly */
+#two .spotlight {
+	background: transparent; /* no !important so per-row rules below can override */
+}
+
+/* Desktop/tablet: paint the entire row with a half-transparent gradient so
+   the colored rectangle always reaches the full height. */
+@media (min-width: 981px) {
+	/* clear any previous per-row colors */
+	#two .spotlight .content { background: transparent; }
+
+	/* odd rows: image left (transparent), content right (light) */
+	#two .spotlight:nth-child(2n + 1) {
+		background: linear-gradient(to right,
+			transparent var(--split-image),
+			var(--spotlight-light-bg) 0);
+	}
+
+	/* even rows: image right (transparent), content left (dark) */
+	#two .spotlight:nth-child(2n) {
+		background: linear-gradient(to left,
+			transparent var(--split-image),
+			var(--spotlight-dark-bg) 0);
+	}
+}
+
+/* Text colors on content blocks */
+#two .spotlight:nth-child(1) .content,
+#two .spotlight:nth-child(3) .content { color: #000000; }
+#two .spotlight:nth-child(1) .content h2,
+#two .spotlight:nth-child(3) .content h2 { color: #000000; }
+#two .spotlight:nth-child(2) .content,
+#two .spotlight:nth-child(4) .content { color: #ffffff; }
+
+/* Ensure we only color the content block on mobile */
+#two .spotlight .content { background-clip: padding-box; }
+
+/* Tablet breakpoint matches main.css column change */
+@media (max-width: 1280px) {
+	#two { --split-image: 45%; }
+}
+
+/* Mobile: stacked layout, color only the content block */
+@media (max-width: 980px) {
+	#two .spotlight { background: transparent; }
+	#two .spotlight:nth-child(1) .content,
+	#two .spotlight:nth-child(3) .content { background-color: var(--spotlight-light-bg); }
+	#two .spotlight:nth-child(2) .content,
+	#two .spotlight:nth-child(4) .content { background-color: var(--spotlight-dark-bg); }
+}
+
+/* --- Appear-on-scroll animation ------------------------ */
+/* Initial hidden state for both the row and its content */
+#two .spotlight,
+#two .spotlight .content {
+	opacity: 0;
+	transform: translateX(var(--slide-offset, 40px));
+	transition: opacity 500ms ease, transform 500ms ease;
+}
+
+/* Odd rows (1,3,5...): slide from right */
+#two .spotlight:nth-child(2n + 1),
+#two .spotlight:nth-child(2n + 1) .content { --slide-offset: 40px; }
+/* Even rows (2,4,6...): slide from left */
+#two .spotlight:nth-child(2n),
+#two .spotlight:nth-child(2n) .content { --slide-offset: -40px; }
+
+/* When visible, fade in and reset transform */
+#two .spotlight.is-visible,
+#two .spotlight.is-visible .content {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+/* Mobile: smaller offset for smoother feel */
+@media (max-width: 980px) {
+	#two .spotlight,
+	#two .spotlight .content { --slide-offset: 20px; }
+}
+
+/* Keep internal spacing consistent when backgrounds are applied */
+#two .spotlight .content {
+	border-radius: 0;
+}
+
+/* Center content vertically inside the colored rectangle (desktop/tablet) */
+@media (min-width: 981px) {
+	#two .spotlight .content {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 3em 4em; /* symmetric vertical padding so it queda centrado */
+	}
+}

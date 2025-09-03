@@ -1,0 +1,30 @@
+/* Global styles for header visibility - Required for Spectral theme functionality */
+
+/* Header visibility controls - MUST be global for Spectral's scrollex to work */
+/* When header has .alt class (on banner section), make it invisible */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* lock horizontal scroll */
+}
+
+#header.alt {
+  opacity: 0 !important;
+  background: transparent !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+#header.alt h1,
+#header.alt nav {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* When header does NOT have .alt class (after scroll), make it visible */
+#header {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+  background: #ffffff; /* pure white */
+}

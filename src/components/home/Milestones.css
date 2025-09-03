@@ -1,0 +1,9 @@
+/* Milestones section shares look with Programs (full-bleed, 2-per-row squares) */
+
+@import "./Programs.css";
+
+#milestones {
+  position: relative;
+}
+
+/* Use the same grid/card styles inherited via import, but scope if needed */

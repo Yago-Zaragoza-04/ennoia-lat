@@ -1,0 +1,48 @@
+/* Banner component specific styles */
+
+/* Banner setup with video background */
+#banner { 
+  position: relative; 
+  overflow: hidden; 
+}
+
+#banner .bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 0; /* keep under overlay and content */
+  object-fit: cover;
+}
+
+/* Dedicated overlay element (avoids conflicts with template pseudo-element) */
+#banner .bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Neutralize the theme's fading #banner:after overlay */
+#banner:after { 
+  content: none !important; 
+}
+
+#banner .inner { 
+  position: relative; 
+  z-index: 2; 
+}
+
+/* Mobile: enlarge the logo-with-lines block */
+@media screen and (max-width: 736px) {
+  /* Increase the horizontal padding so the lines grow longer */
+  #banner .inner h2 { padding: 0.55em 1.35em !important; }
+  /* Make the lines a bit thicker for visibility on small screens */
+  #banner .inner h2:before,
+  #banner .inner h2:after { height: 3px !important; }
+}
