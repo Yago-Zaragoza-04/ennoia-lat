@@ -62,3 +62,6 @@ section#one.wrapper.style1.special header.major h2::after {
 			var(--section1-bg);
 	}
 }
+
+#one { scroll-margin-top: 84px; }
+@media (max-width: 736px) { #one { scroll-margin-top: 72px; } }

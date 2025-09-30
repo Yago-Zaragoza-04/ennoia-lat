@@ -2,6 +2,16 @@ import React from "react";
 import BannerContent from "./BannerContent.jsx";
 import "./Banner.css";
 
+function scrollToSectionOne(e) {
+  e.preventDefault();
+  const target = document.getElementById("one");
+  if (!target) return;
+  const header = document.getElementById("header");
+  const offset = (header?.offsetHeight || 70) + 4; // small spacing
+  const y = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: y, behavior: "smooth" });
+}
+
 export default function Banner() {
   return (
     <section id="banner">
@@ -19,7 +29,13 @@ export default function Banner() {
       </video>
       <div className="bg-overlay" aria-hidden="true"></div>
       <BannerContent />
-      <a href="#one" className="more scrolly">Conoce más</a>
+      <a
+        href="#one"
+        className="more scrolly"
+        onClick={scrollToSectionOne}
+      >
+        Conoce más
+      </a>
     </section>
   );
 }

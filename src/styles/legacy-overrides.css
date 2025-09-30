@@ -22,6 +22,7 @@ input[type="button"] {
   border-color: var(--legacy-accent) !important;
   color: #000 !important;
 }
+
 .button:hover,
 button:hover,
 input[type="submit"]:hover,

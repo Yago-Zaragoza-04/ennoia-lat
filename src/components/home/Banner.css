@@ -87,7 +87,7 @@
 
 #banner .inner { 
   position: relative; 
-  z-index: 2; 
+  z-index: 1; 
 }
 
 /* Mobile: enlarge the logo-with-lines block */
