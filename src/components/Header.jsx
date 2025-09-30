@@ -59,17 +59,28 @@ export default function Header({ alt = false }) {
         </a>
       </h1>
       <nav id="nav" aria-label="Principal">
+        {/* Botón hamburguesa (móvil) */}
         <button
-          className="menu-toggle"
+          className={`hamburger ${open ? 'is-open' : ''}`}
           aria-expanded={open}
           aria-controls="nav-links"
+          aria-label="Abrir menú"
           onClick={() => setOpen(!open)}
         >
-          <span className="sr-only">Menú</span>
           <span className="bars" />
         </button>
-  {/* Mobile overlay */}
-  <div className={`nav-overlay ${open ? 'open' : ''}`} onClick={() => setOpen(false)} />
+        {open && (
+          <button
+            type="button"
+            className="menu-close"
+            aria-label="Cerrar menú"
+            onClick={() => setOpen(false)}
+          >
+            <span aria-hidden>×</span>
+          </button>
+        )}
+        {/* Mobile overlay */}
+        <div className={`nav-overlay ${open ? 'open' : ''}`} onClick={() => setOpen(false)} />
         <ul id="nav-links" className={`nav-links ${open ? "open" : ""}`} onClick={() => setOpen(false)}>
           <li><a href="#banner">Inicio</a></li>
           <li><a href="#programs">Programas e Hitos</a></li>
