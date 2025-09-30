@@ -1,24 +1,39 @@
 /* SectionOne component specific styles */
 
-/* Palette derived from hero video green and white header */
+/* Neon palette adaptation (inherits global variables if present) */
 :root {
-	--section1-bg: #0d1b12;            /* very dark greenish background */
-	--section1-bg-glow: rgba(63, 158, 106, 0.18); /* soft green glow */
-	--section1-accent: #3f9e6a;        /* accent green close to video tint */
-	--section1-text: #ffffff;          /* text to match white header */
+	--section1-bg: #000000;
+	--section1-bg-glow: rgba(73,235,0,0.08);
+	--section1-accent: #49EB00;
+	--section1-accent-glow: 0 0 6px rgba(73,235,0,0.85), 0 0 14px rgba(73,235,0,0.45);
+	--section1-text: #ffffff;
 }
 
 /* Dark background with subtle inner glow to keep it "illuminated" */
-#one.wrapper.style1.special {
-	background: radial-gradient(1200px 600px at 50% -200px, var(--section1-bg-glow), transparent 60%),
-							linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0) 30%),
-							var(--section1-bg);
-	color: var(--section1-text);
+#one.wrapper.style1.special, section#one.wrapper.style1.special {
+	background: #000000 !important;
+	color: var(--section1-text) !important;
 }
 
+/* Optional subtle scanline / noise effect (comment out if not desired) */
+/* Removed scanline texture */
+
 /* Heading underline and icon accent in green */
-#one .major:after {
-	background-color: var(--section1-accent);
+/* Single base line (original border-bottom from theme) plus a glow layer */
+section#one.wrapper.style1.special header.major h2 {
+	position: relative;
+	border-bottom: 2px solid #49EB00 !important; /* ensure correct color */
+	box-shadow: none !important; /* remove block shadow */
+}
+/* Glow only (pseudo sits exactly over the border to create neon effect) */
+section#one.wrapper.style1.special header.major h2::after {
+	content: '';
+	position: absolute;
+	left: 0; bottom: -2px; /* align glow with border */
+	width: 100%; height: 2px;
+	background: #49EB00;
+	pointer-events: none;
+	box-shadow: 0 0 6px rgba(73,235,0,0.85), 0 0 16px rgba(73,235,0,0.55), 0 0 28px rgba(73,235,0,0.35);
 }
 
 #one .icons.major .icon {
@@ -32,15 +47,18 @@
 }
 
 /* Paragraph readability */
-#one .inner p {
-	color: rgba(255,255,255,0.85);
-}
+#one .inner p, section#one .inner p { color: rgba(255,255,255,0.82) !important; }
+
+/* Headline neon alternate (apply class if desired) */
+/* Optional neon class left available but disabled glow for clean look */
+#one .major h2.neon, section#one .major h2.neon { color: #49EB00 !important; text-shadow: none !important; }
 
 /* Keep spacing consistent */
 @media (max-width: 980px) {
 	#one.wrapper.style1.special {
-		background: radial-gradient(900px 420px at 50% -140px, var(--section1-bg-glow), transparent 60%),
-								linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0) 30%),
-								var(--section1-bg);
+		background: 
+			radial-gradient(720px 360px at 50% -120px, var(--section1-bg-glow), transparent 65%),
+			linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0) 28%),
+			var(--section1-bg);
 	}
 }

@@ -24,7 +24,7 @@ export default function SectionTwoSpotlights() {
       { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0.2 }
     );
 
-  sections.forEach((el) => io.observe(el));
+    sections.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
   return (
@@ -36,13 +36,14 @@ export default function SectionTwoSpotlights() {
         <div className="content">
           <h2>Qué es Ennoia</h2>
           <p>
-            Somos una plataforma de colaboración y laboratorio de futuros que
-            conecta ciencia, industria e inversión para acelerar ideas con
-            impacto real.
+            Ennoia es una comunidad que acompaña a grupos de investigación para
+            desarrollar capacidades que permitan imaginar y construir futuros
+            posibles.
             <br />
-            Impulsamos proyectos que cruzan fronteras disciplinarias y
-            geográficas, y acompañamos a investigadores, emprendedores y
-            organizaciones a transformar conocimiento en soluciones concretas.
+            Entrenamos líderes en nuevas habilidades, conectamos talentos
+            diversos y co-creamos soluciones para los desafíos de hoy y mañana.
+            Trabajamos con el sector publico y privado e instituciones del
+            tercer sector.
           </p>
         </div>
       </section>
@@ -67,11 +68,10 @@ export default function SectionTwoSpotlights() {
           <h2>Cómo potenciamos tu ciencia</h2>
           <p>
             Ennoia funciona como una red viva: ofrece entrenamientos, mentorías,
-            hubs temáticos y alianzas estratégicas. 
+            hubs temáticos y alianzas estratégicas.
             <br />
-            Trabajamos con empresas,
-            gobiernos y fondos para diseñar hojas de ruta, crear prototipos y
-            generar impacto sostenible
+            Trabajamos con empresas, gobiernos y fondos para diseñar hojas de
+            ruta, crear prototipos y generar impacto sostenible
           </p>
         </div>
       </section>

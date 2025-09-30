@@ -1779,7 +1779,6 @@ input, select, textarea {
 	}
 
 		header.major h2, header.major h3, header.major h4, header.major h5, header.major h6 {
-			border-bottom: solid 2px #fff;
 			display: inline-block;
 			padding-bottom: 1em;
 			position: relative;
@@ -2817,7 +2816,7 @@ input, select, textarea {
 		}
 
 		.wrapper.style1 {
-			background-color: #21b2a6;
+			background-color: #000000;
 			color: #c8ece9;
 		}
 

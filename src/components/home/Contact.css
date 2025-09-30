@@ -1,9 +1,6 @@
 /* Contact section with submenu switching 4 forms; palette aligned with SectionOne */
 
 #contact.wrapper.style1.special {
-  background: radial-gradient(1200px 600px at 50% -200px, var(--section1-bg-glow, rgba(63, 158, 106, 0.18)), transparent 60%),
-              linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0) 30%),
-              var(--section1-bg, #0d1b12);
   color: var(--section1-text, #ffffff);
 }
 
@@ -85,10 +82,26 @@
   border: 2px solid var(--section1-accent, #3f9e6a);
 }
 
+/* Hover neon acorde paleta (sin rojo) */
+#contact .button.primary:hover:not([disabled]),
+#contact .button.primary:focus-visible:not([disabled]) {
+  background: #49EB00 !important;
+  border-color: #49EB00 !important;
+  color: #000000 !important;
+  box-shadow: 0 0 6px rgba(73,235,0,0.7), 0 0 16px rgba(73,235,0,0.45);
+  outline: none;
+}
+
+/* Estado activo: sutil presión */
+#contact .button.primary:active:not([disabled]) {
+  transform: translateY(1px);
+  box-shadow: 0 0 4px rgba(73,235,0,0.6), 0 0 10px rgba(73,235,0,0.35) inset;
+}
+
 #contact .button.secondary {
   background: transparent;
   border: 2px solid rgba(255,255,255,0.85);
-  color: #fff !important;
+  color: #000 !important;
 }
 
 /* Disabled state */

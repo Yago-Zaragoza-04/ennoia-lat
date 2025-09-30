@@ -110,7 +110,7 @@
 #cta.community .button.ghost {
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.85);
-  color: #fff !important;
+  color: #000 !important;
   /* make all buttons same width */
   display: inline-flex;
   width: 100%;

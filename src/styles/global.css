@@ -2,9 +2,30 @@
 
 /* Header visibility controls - MUST be global for Spectral's scrollex to work */
 /* When header has .alt class (on banner section), make it invisible */
+/* ====== Custom Ennoia Latam Palette Injection ====== */
+/* Palette provided: #000000, #292A29, #525352, #49EB00 */
+/* Expose as CSS variables so we can progressively migrate legacy SASS output */
+:root {
+  --color-black: #000000;
+  --color-jet: #292A29; /* dark neutral background */
+  --color-davys-gray: #525352; /* mid neutral */
+  --color-accent: #49EB00; /* primary accent (neon green) */
+  --color-bg: var(--color-jet);
+  --color-bg-alt: var(--color-black);
+  --color-surface: var(--color-davys-gray);
+  --color-text: #ffffff; /* keep white text for contrast */
+  --color-text-muted: rgba(255,255,255,0.65);
+  --color-border: #3a3b3a;
+  --color-focus-ring: var(--color-accent);
+  --transition-base: 0.25s ease;
+}
+
 html, body {
   max-width: 100%;
   overflow-x: hidden; /* lock horizontal scroll */
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
 }
 
 #header.alt {
@@ -21,10 +42,223 @@ html, body {
 }
 
 /* When header does NOT have .alt class (after scroll), make it visible */
+/* Standard header (scrolled) now uses dark surface with subtle border */
 #header {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition: opacity 0.3s ease;
-  background: #ffffff; /* pure white */
+  transition: opacity var(--transition-base);
+  background: var(--color-surface);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--color-border);
 }
+
+/* Links */
+a { color: var(--color-accent); transition: color var(--transition-base); }
+a:hover, a:focus { color: #6fff2b; }
+
+/* Buttons (legacy theme likely styles .button) */
+button, .button, input[type=submit], input[type=button] {
+  background: var(--color-accent);
+  border: none;
+  color: #000; /* high contrast on neon */
+  font-weight: 600;
+  letter-spacing: .05em;
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+button:hover, .button:hover, input[type=submit]:hover, input[type=button]:hover {
+  background: #6fff2b;
+  transform: translateY(-2px);
+}
+button:active, .button:active, input[type=submit]:active, input[type=button]:active {
+  transform: translateY(0);
+}
+
+/* Sections / panels base overrides (soft layering) */
+section, .spotlight, .features, .inner, .wrapper {
+  background: transparent;
+}
+
+/* Cards or spotlight items that might have white backgrounds in original theme */
+.box, .feature, .spotlight .content {
+  background: var(--color-surface);
+  border-radius: 0.75rem;
+}
+
+/* Muted text */
+small, .text-muted, .subtext { color: var(--color-text-muted); }
+
+/* Forms */
+input, textarea, select {
+  background: var(--color-black);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Utility: accent border / highlight */
+.accent-border { border: 2px solid var(--color-accent) !important; }
+
+/* Scrollbar (webkit) */
+* {
+  scrollbar-color: var(--color-accent) var(--color-black);
+}
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-black); }
+::-webkit-scrollbar-thumb { background: var(--color-davys-gray); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+/* Footer tweak */
+#footer { background: var(--color-black); border-top: 1px solid var(--color-border); }
+
+/* =============================================================
+   ENNOIA NEON ACCENT SYSTEM (Black + Fluor Green Combinations)
+   Utilities & component helpers to make #49EB00 pop over black.
+   ============================================================= */
+
+/* Base heading styling adjustments */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  position: relative;
+}
+
+/* Neon accent text (static) */
+.text-accent { color: var(--color-accent) !important; }
+
+/* White to neon on hover/focus */
+.hover-accent, a.hover-accent {
+  color: #ffffff;
+  transition: color var(--transition-base), text-shadow var(--transition-base);
+}
+.hover-accent:hover, .hover-accent:focus {
+  color: var(--color-accent);
+  text-shadow: 0 0 6px rgba(73,235,0,0.75), 0 0 18px rgba(73,235,0,0.45);
+}
+
+/* Accent glow utility */
+.accent-glow {
+  color: var(--color-accent);
+  text-shadow: 0 0 4px rgba(73,235,0,0.9), 0 0 14px rgba(73,235,0,0.6), 0 0 28px rgba(73,235,0,0.35);
+}
+
+/* Gradient accent text (animated shimmer) */
+.text-gradient-accent {
+  background: linear-gradient(90deg, #49EB00 0%, #8dff40 50%, #49EB00 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: accent-shift 5s linear infinite;
+}
+@keyframes accent-shift { 0% { background-position: 0 0; } 100% { background-position: -200% 0; } }
+
+/* Underline accent that animates in */
+.accent-underline { position: relative; }
+.accent-underline::after {
+  content: "";
+  position: absolute; left: 0; bottom: -0.35em;
+  width: 100%; height: 3px;
+  background: var(--color-accent);
+  box-shadow: 0 0 6px rgba(73,235,0,0.7);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-base) 0.05s;
+}
+.accent-underline:hover::after, .accent-underline:focus::after, .accent-underline.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Outline / Ghost button with neon border */
+.button-outline, .btn-outline {
+  background: transparent !important;
+  border: 2px solid var(--color-accent) !important;
+  color: var(--color-accent) !important;
+  box-shadow: 0 0 0 rgba(73,235,0,0.0);
+}
+.button-outline:hover, .btn-outline:hover {
+  background: var(--color-accent) !important;
+  color: #000 !important;
+  box-shadow: 0 0 10px rgba(73,235,0,0.8), 0 0 20px rgba(73,235,0,0.5);
+}
+
+/* Solid neon button refinement */
+.button, button, input[type=submit], input[type=button] {
+  box-shadow: 0 0 0 rgba(73,235,0,0);
+}
+.button:hover, button:hover, input[type=submit]:hover, input[type=button]:hover {
+  box-shadow: 0 0 10px rgba(73,235,0,0.85), 0 0 26px rgba(73,235,0,0.45);
+}
+
+/* Inverted chip/pill (dark with neon ring) */
+.pill-invert {
+  background: linear-gradient(#000,#000) padding-box, linear-gradient(145deg,#1a1a1a,#292A29,#525352) border-box;
+  border: 2px solid transparent;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.55em 1.15em;
+  position: relative;
+}
+.pill-invert::after {
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  box-shadow: 0 0 0 0 rgba(73,235,0,0.6), 0 0 0 0 rgba(73,235,0,0.3);
+  transition: box-shadow var(--transition-base);
+}
+.pill-invert:hover::after { box-shadow: 0 0 6px 2px rgba(73,235,0,0.7), 0 0 18px 4px rgba(73,235,0,0.45); }
+
+/* Pulse animation (use on CTA) */
+.pulse-accent { position: relative; }
+.pulse-accent::before {
+  content:''; position:absolute; inset:0; border-radius:inherit;
+  background: var(--color-accent); opacity:0.35; filter:blur(8px);
+  animation: pulse-accent 2.4s ease-in-out infinite; z-index:-1;
+}
+@keyframes pulse-accent { 0% { transform: scale(.9); opacity:0.35;} 50% { transform: scale(1.15); opacity:0;} 100% { transform: scale(.9); opacity:0.35;} }
+
+/* Section headers with left neon bar */
+.neon-left-bar { position: relative; padding-left: 1.1rem; }
+.neon-left-bar::before {
+  content:""; position:absolute; left:0; top:0.15em; bottom:0.15em; width:4px;
+  background: var(--color-accent);
+  box-shadow: 0 0 6px rgba(73,235,0,0.8), 0 0 18px rgba(73,235,0,0.35);
+  border-radius: 2px;
+}
+
+/* Dark panels with subtle inner stroke */
+.panel-dark {
+  background: linear-gradient(145deg,#000 0%, #111 40%, #1b1b1b 100%);
+  border: 1px solid #1e1e1e;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 0 1px #262626, 0 4px 14px -6px rgba(0,0,0,0.6);
+}
+
+/* Utility to force black background (e.g., wrappers) */
+.bg-black { background:#000 !important; }
+
+/* Utility to add subtle grid or noise (placeholder for future) */
+.bg-black.texture-dots {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+/* Accessibility: focus rings */
+:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+
+/* Tables, hr, separators adapt to dark */
+hr { border:0; height:1px; background:linear-gradient(90deg, transparent, var(--color-davys-gray), transparent); }
+table { border-color: var(--color-border); }
+thead { background: var(--color-black); }
+tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+/* Code blocks / pre elements (if present) */
+pre, code { background:#101010; color: var(--color-accent); border:1px solid #1f1f1f; }
+
+/* Fade-in animation helper for staged reveals */
+.fade-in-up { opacity:0; transform:translateY(14px); animation: fadeUp .7s ease forwards; }
+@keyframes fadeUp { to { opacity:1; transform:translateY(0);} }
+
+/* Suggest applying .fade-in-up via JS or intersection observer if needed */
