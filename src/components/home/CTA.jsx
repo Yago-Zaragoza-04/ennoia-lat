@@ -18,7 +18,7 @@ export default function CTA() {
       <video
         className="bg-video"
         src="/videos/ennoia_comunidad_fondo.webm"
-  poster="/images/ennoia_lat_fondo.png"
+  poster="/images/ennoia_lat_fondo.webp"
         autoPlay
         muted
         loop

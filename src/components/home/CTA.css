@@ -191,6 +191,13 @@
     display: none;
   }
   #cta.community {
-    background: url("/images/ennoia_lat_fondo.png") center / cover no-repeat;
+  /* Intentar primero formato moderno */
+  background: url("/images/ennoia_lat_fondo.webp") center / cover no-repeat;
+  /* Fallback opcional para navegadores sin soporte webp (sobrescribe si aplica)
+     Puedes eliminarlo si no lo necesitás */
+  background-image: image-set(
+    url("/images/ennoia_lat_fondo.webp") type("image/webp") 1x,
+    url("/images/ennoia_lat_fondo.webp") type("image/webp") 2x
+  );
   }
 }
